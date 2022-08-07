@@ -1,6 +1,6 @@
 """ミノ駆動本読書py"""
 from dataclasses import dataclass
-from datetime import time
+from datetime import datetime, time, timedelta
 
 
 @dataclass
@@ -8,17 +8,27 @@ class MinoDrivenBookReadingPy:
     count: int
     connpass_url: str
     reading_range: str
+    event_year: int
+    event_month: int
+    event_day: int
+    event_hour: int
+    event_minute: int
     start_time: str
     main_time: str
     reading_book_time: str
     chapter: list
+
+    BOOK_READING_TIME = 30
+    MAIN_TIME = 90
 
     def make_message(self):
         title = self._title()
         tag = self._tag()
         please = self._please()
         what_is_this_memo = self._what_is_this_memo()
-        flow = self._flow()
+        start_reading_book_time, base_time, finish_main_time = \
+            self._calc_datetime()
+        flow = self._flow(start_reading_book_time, base_time, finish_main_time)
         chapter = self._make_chapter()
         return title + tag + please + what_is_this_memo + flow + chapter
 
@@ -49,17 +59,17 @@ class MinoDrivenBookReadingPy:
                "ミノ駆動本のサポートページより、Javaのサンプルコードが見られます。\n" \
                "https://gihyo.jp/book/2022/978-4-297-12783-1/support\n\n"
 
-    def _flow(self):
+    def _flow(self, start_reading_book_time, base_time, finish_main_time):
         return "## 読書会の流れ\n\n" \
-               f"* {self.mokumoku_timreading_book_time} **自由参加**のもくもく会（個人作業）\n" \
+               f"* {start_reading_book_time}〜{base_time} **自由参加**のもくもく会（個人作業）\n" \
                "- 事前に読む時間がとれなかった方はここで読んじゃいましょう（ざっとで大丈夫です）\n" \
                "- 合わせて、この**HackMD**に話したいことを各自書いてください\n" \
                "        - ログインすれば書ける設定にしています\n" \
                "        - ここがわからん、ここはわかった　お気軽に書き込んでみてください\n" \
                "        - HackMDの書き込みに投票し、みんなが気になるところをわいわい読み解いていきます\n" \
-               f"* {self.main_time} 読書会本編（みんなでわいわい）\n" \
+               f"* {base_time}〜{finish_main_time} 読書会本編（みんなでわいわい）\n" \
                "    * Discordでスライド共有して別途案内します\n" \
-               f"    * {self.start_time}時開始の本編では、「わたしこれ気になる！」" \
+               f"    * {base_time}開始の本編では、「わたしこれ気になる！」" \
                f"という話題に `:+1:` と書いて投票します。\n" \
                "        * :+1: する上限はありません。" \
                "気になる話題に全部 :+1: しちゃいましょう。" \
@@ -95,10 +105,21 @@ class MinoDrivenBookReadingPy:
         return chapter
 
     def _calc_datetime(self):
-        default_time = 20
-        default_minute = 00
-        self.start_time
-        print(time(hour=20, minute=00).isoformat(timespec='minutes'))
+        base_time = datetime(
+            self.event_year,
+            self.event_month,
+            self.event_day,
+            self.event_hour,
+            self.event_minute
+        )
+        start_book_reading_time = base_time - timedelta(
+            minutes=self.BOOK_READING_TIME)
+
+        finish_main_time = base_time + timedelta(minutes=self.MAIN_TIME)
+        return \
+            start_book_reading_time.strftime("%H:%M"), \
+            base_time.strftime("%H:%M"), \
+            finish_main_time.strftime("%H:%M")
 
 
 if __name__ == '__main__':
@@ -109,6 +130,11 @@ if __name__ == '__main__':
         connpass_url="https://pythonista-books.connpass.com/event/256267/",
         reading_range="10章",
         start_time="20",
+        event_year=2022,
+        event_month=8,
+        event_day=13,
+        event_hour=20,
+        event_minute=00,
         reading_book_time="19:30〜20:00",
         main_time="20:00〜21:30",
         chapter=[
