@@ -146,10 +146,15 @@ if __name__ == '__main__':
                 '10.7 名前の省略',
             ]
         )
+    except Exception as e:
+        print(f"インスタンス生成に失敗しました。異常値が無いか確認してください。")
+        raise e
+    try:
         p = Path("hackmd.md")
         p.touch()
         with p.open(mode="w") as f:
             f.write(mino_driven.make_message())
-        print("作成完了！ 出力されたmarkdownを確認してください。")
+        print("作成完了！ 出力されたファイルを確認してください。")
     except Exception as e:
-        print(f"作成に失敗しました。エラー内容:{e}")
+        print(f"作成に失敗しました。")
+        raise e
