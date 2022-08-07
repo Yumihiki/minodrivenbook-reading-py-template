@@ -31,8 +31,7 @@ class MinoDrivenBookReadingPy:
         return title + tag + please + what_is_this_memo + flow + chapter
 
     def _title(self):
-        return f"""# (template) ミノ駆動本_読書py[{self.count}] みんなのメモ
-"""
+        return f"""# ミノ駆動本_読書py[{self.count}] みんなのメモ"""
 
     def _tag(self):
         return f"""
@@ -105,7 +104,7 @@ https://gihyo.jp/book/2022/978-4-297-12783-1/support
 
 """
 
-    def _kininaru(self, *args):
+    def _kininaru(self):
         return f"""
 以下は各節で「これってどういうことなんだろう」
 「ここからこういう気付きがあった」などを書き出すゾーンです。
@@ -143,10 +142,11 @@ https://gihyo.jp/book/2022/978-4-297-12783-1/support
             self.event_hour,
             self.event_minute
         )
-        start_book_reading_time = base_time - timedelta(
-            minutes=self.BOOK_READING_TIME)
+        start_book_reading_time = \
+            base_time - timedelta(minutes=self.BOOK_READING_TIME)
 
         finish_main_time = base_time + timedelta(minutes=self.MAIN_TIME)
+
         return \
             start_book_reading_time.strftime("%H:%M"), \
             base_time.strftime("%H:%M"), \
@@ -186,8 +186,6 @@ if __name__ == '__main__':
         p = Path("hackmd.md")
         p.touch()
         p.write_text(mino_driven.make_message())
-        # with p.open(mode="w") as f:
-        #     f.write(mino_driven.make_message())
         print("作成完了！ 出力されたファイルを確認してください。")
     except Exception as e:
         print(f"作成に失敗しました。")
