@@ -31,74 +31,107 @@ class MinoDrivenBookReadingPy:
         return title + tag + please + what_is_this_memo + flow + chapter
 
     def _title(self):
-        return f"# (template) ミノ駆動本_読書py[{self.count}] みんなのメモ\n\n"
+        return f"""# (template) ミノ駆動本_読書py[{self.count}] みんなのメモ
+"""
 
     def _tag(self):
-        return "###### tags: `ミノ駆動本`\n\n" \
-               "- このメモはWebに公開されています（HackMDチーム）\n" \
-               "- リンクを知っている人は見られます\n" \
-               "- HackMDにログインして編集できます\n\n"
+        return f"""
+###### tags: `ミノ駆動本`
+
+- このメモはWebに公開されています（HackMDチーム）
+- リンクを知っている人は見られます
+- HackMDにログインして編集できます{self.count}
+
+"""
 
     def _please(self):
-        return "## お願い事項\n\n" \
-               "https://twitter.com/MinoDriven/status/1541334416622256130\n\n" \
-               "> 【お願い】" \
-               "拙著『良いコード／悪いコードで学ぶ設計入門』に関する情報発信について。\n" \
-               "ブログ等で発信の際は、引用の範囲を超え、著作権侵害となる場合は勿論のこと、" \
-               "拙著の詳細内容が分かるような表現での公開はお控え頂けると助かります。" \
-               "ご感想や拙著に基づく試行錯誤は歓迎です。 #ミノ駆動本\n\n" \
-               "とミノ駆動さんが仰られていますので、勉強会そのものでも詳細内容がわかる記述はしないように気をつけていきましょう。\n\n"
+        return """
+## お願い事項
+
+https://twitter.com/MinoDriven/status/1541334416622256130
+
+> 【お願い】
+拙著『良いコード／悪いコードで学ぶ設計入門』に関する情報発信について。
+ブログ等で発信の際は、引用の範囲を超え、著作権侵害となる場合は勿論のこと、
+拙著の詳細内容が分かるような表現での公開はお控え頂けると助かります。
+ご感想や拙著に基づく試行錯誤は歓迎です。 #ミノ駆動本
+
+とミノ駆動さんが仰られていますので、勉強会そのものでも詳細内容がわかる記述はしないように気をつけていきましょう。
+
+"""
 
     def _what_is_this_memo(self):
-        return "## このメモについて\n\n" \
-               f"このメモは ミノ駆動本_読書py[{self.count}] のメモです\n" \
-               f"{self.connpass_url}\n\n" \
-               f"読む範囲: {self.reading_range}\n\n" \
-               "ミノ駆動本のサポートページより、Javaのサンプルコードが見られます。\n" \
-               "https://gihyo.jp/book/2022/978-4-297-12783-1/support\n\n"
+        return f"""
+## このメモについて
+
+このメモは ミノ駆動本_読書py[{self.count}] のメモです
+{self.connpass_url}
+
+読む範囲: {self.reading_range}
+
+ミノ駆動本のサポートページより、Javaのサンプルコードが見られます。
+https://gihyo.jp/book/2022/978-4-297-12783-1/support
+"""
 
     def _flow(self, start_reading_book_time, base_time, finish_main_time):
-        return "## 読書会の流れ\n\n" \
-               f"* {start_reading_book_time}〜{base_time} **自由参加**のもくもく会（個人作業）\n" \
-               "- 事前に読む時間がとれなかった方はここで読んじゃいましょう（ざっとで大丈夫です）\n" \
-               "- 合わせて、この**HackMD**に話したいことを各自書いてください\n" \
-               "        - ログインすれば書ける設定にしています\n" \
-               "        - ここがわからん、ここはわかった　お気軽に書き込んでみてください\n" \
-               "        - HackMDの書き込みに投票し、みんなが気になるところをわいわい読み解いていきます\n" \
-               f"* {base_time}〜{finish_main_time} 読書会本編（みんなでわいわい）\n" \
-               "    * Discordでスライド共有して別途案内します\n" \
-               f"    * {base_time}開始の本編では、「わたしこれ気になる！」" \
-               f"という話題に `:+1:` と書いて投票します。\n" \
-               "        * :+1: する上限はありません。" \
-               "気になる話題に全部 :+1: しちゃいましょう。" \
-               "ただし1つの話題には1個だけ:+1:でお願いします\n" \
-               "    * 票数が多い話題から話していきます。\n\n"
+        return f"""
+## 読書会の流れ
+
+* {start_reading_book_time}〜{base_time} **自由参加**のもくもく会（個人作業）
+- 事前に読む時間がとれなかった方はここで読んじゃいましょう（ざっとで大丈夫です）
+- 合わせて、この**HackMD**に話したいことを各自書いてください
+        - ログインすれば書ける設定にしています
+        - ここがわからん、ここはわかった　お気軽に書き込んでみてください
+        - HackMDの書き込みに投票し、みんなが気になるところをわいわい読み解いていきます
+* {base_time}〜{finish_main_time} 読書会本編（みんなでわいわい）
+    * Discordでスライド共有して別途案内します
+    * {base_time}開始の本編では、「わたしこれ気になる！」
+という話題に `:+1:` と書いて投票します。
+        * :+1: する上限はありません。
+気になる話題に全部 :+1: しちゃいましょう。
+ただし1つの話題には1個だけ:+1:でお願いします
+    * 票数が多い話題から話していきます。
+"""
 
     def _mokumoku_workzone(self):
-        return "## 以下、もくもく会ワークゾーン\n\n" \
-               "### 感想、気付き\n\n" \
-               "- \n" \
-               "- \n" \
-               "- \n"
+        return """
+## 以下、もくもく会ワークゾーン
+
+### 感想、気付き
+
+- 
+- 
+- 
+
+"""
 
     def _kininaru(self, *args):
-        return "以下は各節で「これってどういうことなんだろう」" \
-               "「ここからこういう気付きがあった」などを書き出すゾーンです。" \
-               f"{self.reading_range}章"
+        return f"""
+以下は各節で「これってどういうことなんだろう」
+「ここからこういう気付きがあった」などを書き出すゾーンです。
+{self.reading_range}章
+
+"""
 
     def _make_chapter(self):
         chapter = ''
         count = 0
         for i in self.chapter:
             if count == 0:
-                t = f"### {i}\n\n"
+                t = f"""
+### {i}
+"""
                 chapter += t
                 count += 1
                 continue
-            t = f"#### {i}\n\n" \
-                "- \n" \
-                "- \n" \
-                "- \n\n"
+            t = f"""
+#### {i}
+
+- 
+- 
+- 
+
+"""
             chapter += t
         return chapter
 
@@ -152,8 +185,9 @@ if __name__ == '__main__':
     try:
         p = Path("hackmd.md")
         p.touch()
-        with p.open(mode="w") as f:
-            f.write(mino_driven.make_message())
+        p.write_text(mino_driven.make_message())
+        # with p.open(mode="w") as f:
+        #     f.write(mino_driven.make_message())
         print("作成完了！ 出力されたファイルを確認してください。")
     except Exception as e:
         print(f"作成に失敗しました。")
