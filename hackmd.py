@@ -1,6 +1,6 @@
 """ミノ駆動本読書py"""
 from dataclasses import dataclass
-from datetime import datetime, time, timedelta
+from datetime import datetime, timedelta
 
 
 @dataclass
@@ -13,9 +13,6 @@ class MinoDrivenBookReadingPy:
     event_day: int
     event_hour: int
     event_minute: int
-    start_time: str
-    main_time: str
-    reading_book_time: str
     chapter: list
 
     BOOK_READING_TIME = 30
@@ -129,14 +126,11 @@ if __name__ == '__main__':
         count=6,
         connpass_url="https://pythonista-books.connpass.com/event/256267/",
         reading_range="10章",
-        start_time="20",
         event_year=2022,
         event_month=8,
         event_day=13,
         event_hour=20,
         event_minute=00,
-        reading_book_time="19:30〜20:00",
-        main_time="20:00〜21:30",
         chapter=[
             '10 名前設計 ―あるべき構造を見破る名前―',
             '10.1 悪魔を呼び寄せる名前',
