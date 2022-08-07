@@ -1,6 +1,7 @@
 """ミノ駆動本読書py"""
 from dataclasses import dataclass
 from datetime import datetime, timedelta
+from pathlib import Path
 
 
 @dataclass
@@ -120,28 +121,35 @@ class MinoDrivenBookReadingPy:
 
 
 if __name__ == '__main__':
-    # チャプターは以下のシートを流用するとサクッと作れるようにしています
-    # https://docs.google.com/spreadsheets/d/1dleM32o2iy5_QgGx9U7Ku9NGiGky7ZX0EinWDXNfi8g/edit#gid=0
-    mino_driven = MinoDrivenBookReadingPy(
-        count=6,
-        connpass_url="https://pythonista-books.connpass.com/event/256267/",
-        reading_range="10章",
-        event_year=2022,
-        event_month=8,
-        event_day=13,
-        event_hour=20,
-        event_minute=00,
-        chapter=[
-            '10 名前設計 ―あるべき構造を見破る名前―',
-            '10.1 悪魔を呼び寄せる名前',
-            '10.2 名前を設計する―目的駆動名前設計',
-            '10.3 設計時の注意すべきリスク',
-            '10.4 意図がわからない名前',
-            'Column 技術駆動命名を用いる分野もある',
-            '10.5 構造を大きく歪ませてしまう名前',
-            'Column クソコード動画「Managerクラス」',
-            '10.6 名前的に居場所が不自然なメソッド',
-            '10.7 名前の省略',
-        ]
-    )
-    print(mino_driven.make_message())
+    try:
+        # チャプターは以下のシートを流用するとサクッと作れるようにしています
+        # https://docs.google.com/spreadsheets/d/1dleM32o2iy5_QgGx9U7Ku9NGiGky7ZX0EinWDXNfi8g/edit#gid=0
+        mino_driven = MinoDrivenBookReadingPy(
+            count=6,
+            connpass_url="https://pythonista-books.connpass.com/event/256267/",
+            reading_range="10章",
+            event_year=2022,
+            event_month=8,
+            event_day=13,
+            event_hour=20,
+            event_minute=00,
+            chapter=[
+                '10 名前設計 ―あるべき構造を見破る名前―',
+                '10.1 悪魔を呼び寄せる名前',
+                '10.2 名前を設計する―目的駆動名前設計',
+                '10.3 設計時の注意すべきリスク',
+                '10.4 意図がわからない名前',
+                'Column 技術駆動命名を用いる分野もある',
+                '10.5 構造を大きく歪ませてしまう名前',
+                'Column クソコード動画「Managerクラス」',
+                '10.6 名前的に居場所が不自然なメソッド',
+                '10.7 名前の省略',
+            ]
+        )
+        p = Path("hackmd.md")
+        p.touch()
+        with p.open(mode="w") as f:
+            f.write(mino_driven.make_message())
+        print("作成完了！ 出力されたmarkdownを確認してください。")
+    except Exception as e:
+        print(f"作成に失敗しました。エラー内容:{e}")
