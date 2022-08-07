@@ -79,20 +79,20 @@ class MinoDrivenBookReadingPy:
                f"{self.reading_range}章"
 
     def _make_chapter(self):
-        tmp = ''
+        chapter = ''
         count = 0
         for i in self.chapter:
             if count == 0:
                 t = f"### {i}\n\n"
-                tmp += t
+                chapter += t
                 count += 1
                 continue
             t = f"#### {i}\n\n" \
                 "- \n" \
                 "- \n" \
                 "- \n\n"
-            tmp += t
-        return tmp
+            chapter += t
+        return chapter
 
     def _calc_datetime(self):
         default_time = 20
